@@ -1,4 +1,4 @@
-// Mini-Project: Indian Flag
+// Mini-Project: The Indian Flag 💥
 // Renders the Indian national flag with Ashoka Chakra using OpenGL 
 // Arnav Sinha https://github.com/arnav43
 // Linkedin https://www.linkedin.com/in/arnavsinha4334/
@@ -22,7 +22,7 @@ const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800; // Matches Indian flag proportions
 
 // Ashoka Chakra circle parameters
-const int numSegments = 50;    // Number of segments for circle approximation
+const int numSegments = 50000;    // Number of segments for circle approximation
 const float radius = 0.25f;    // Radius of Ashoka Chakra
 const float M_PI = 3.14f;      // Pi constant
 std::vector<float> circlePoints;
@@ -80,7 +80,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Indian Flag", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Arnav's Indian Flag", NULL, NULL);
     if (!window) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -164,7 +164,7 @@ int main() {
         spokes.push_back(0.0f);              // Center y
         spokes.push_back(0.0f);              // Center z
         spokes.push_back(radius * cos(angle)); // End x
-        spokes.push_back(radius * sin(angle)); // End y
+        spokes.push_back(radius * sin(angle) * 1.25); // End y
         spokes.push_back(0.0f);              // End z
     }
 
@@ -228,8 +228,11 @@ int main() {
 
         // Draw Ashoka Chakra (circle and spokes)
         glUseProgram(shaderProgram3);
+        // using shader 3 for both circle and spokes
+        // circle
         glBindVertexArray(circleVAO);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, circlePoints.size() / 3);
+        glDrawArrays(GL_LINES, 0, circlePoints.size() / 3);
+        // spokes
         glBindVertexArray(spokesVAO);
         glDrawArrays(GL_LINES, 0, spokes.size() / 3);
 
